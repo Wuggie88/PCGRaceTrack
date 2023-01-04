@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Tracks 
 {
+    /* Correct NumberofCurves()
+     * Correct Fitness(), change how to calculate fitness, conflict between factors?
+     */
 
     Color color = Color.red;
     public List<Vector3> trackDirections;

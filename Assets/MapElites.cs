@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class MapElites : MonoBehaviour
 {
+    /* Make a list of tracks called population
+     * Mutate some tracks from the population
+     * Discard some of the tracks in the popultion
+     * Insert mutated tracks in population
+     * Repeat cycle a number of times
+     * Map the tracks with the best fitness
+     */
+
     public Tracks[] map = new Tracks[9];
     public Tracks track;
     Vector3 startingPoint = new Vector3(0,0,0);
