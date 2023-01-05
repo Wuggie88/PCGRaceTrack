@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class MapElites : MonoBehaviour
 {
-    /* Make a list of tracks called population
+    /*
      * Mutate some tracks from the population
-     * Discard some of the tracks in the popultion
-     * Insert mutated tracks in population
-     * Repeat cycle a number of times
      * Map the tracks with the best fitness
      */
 
@@ -16,7 +13,9 @@ public class MapElites : MonoBehaviour
     public Tracks track;
     Vector3 startingPoint = new Vector3(0,0,0);
     public List<Vector3> Direction = new List<Vector3>();
+    public List<Tracks> population = new List<Tracks>();
     Color color = Color.red;
+    public int mutations = 10;
     int xMax = 10;
     int yMax = 10;
     int xMin = -10;
@@ -39,43 +38,46 @@ public class MapElites : MonoBehaviour
           }*/
 
         // Make 1000 random tracks and place in map
-       for (int i = 0; i <= 1000; i++)
+       for (int i = 0; i <= 100; i++)
         {
-            //Create randome racetracks
+            //Create random racetracks
             track = new Tracks(TrackPoints(startingPoint));
 
-            //Place randome tracks in map
-            MapTrack(track);
+            //Place random tracks in population list
+            population.Add(track);
         }
 
+        population.Sort((x, y) => x.fitness.CompareTo(y.fitness));
+
+        population.RemoveRange(0, 30);
 
         //Mutate tracks 10 times
-       /* for (int i = 0; i <= 10; i++)
-        {
+        /* for (int i = 0; i <= 10; i++)
+         {
 
-            //Select randome Track from map and mutate
-            Tracks mutatedTracks;
-            int select = Random.Range(0, map.Length);
+             //Select random Track from map and mutate
+             Tracks mutatedTracks;
+             int select = Random.Range(0, map.Length);
 
-            //Check if randomely selected mapspace holds a track
-            while (map[select] != null)
-            {
-                
-                //mutate if success
-                mutatedTracks = MutateTracks(map[select]);
-               
-       //place mutated track in map if it is the better solution
-                MapTrack(mutatedTracks);
-               
-        //DrawTrack(mutatedTracks, startingPoint);
-                break;
-     
-            }
-        
-        }
-     
-       
-       */
+             //Check if randomly selected mapspace holds a track
+             while (map[select] != null)
+             {
+
+                 //mutate if success
+                 mutatedTracks = MutateTracks(map[select]);
+
+        //place mutated track in map if it is the better solution
+                 MapTrack(mutatedTracks);
+
+         //DrawTrack(mutatedTracks, startingPoint);
+                 break;
+
+             }
+
+         }
+
+
+        */
         /*  for (int i = 0; i < map.Count; i++)
           {
               Debug.Log(map[i].length);
@@ -85,18 +87,7 @@ public class MapElites : MonoBehaviour
           //see how many tracks is mapped
           Debug.Log(map.Count);
         */
-
-        //Draw tracks in scene
-        DrawTrack(map[0], new Vector3(0, 0, 0));
-        DrawTrack(map[1], new Vector3(0, 30, 0));
-        DrawTrack(map[2], new Vector3(0, 60, 0));
-        DrawTrack(map[3], new Vector3(30, 0, 0));
-        DrawTrack(map[4], new Vector3(30, 30, 0));
-        DrawTrack(map[5], new Vector3(30, 60, 0));
-        DrawTrack(map[6], new Vector3(60, 0, 0));
-        DrawTrack(map[7], new Vector3(60, 30, 0));
-        DrawTrack(map[8], new Vector3(60, 60, 0));
-        
+        MutateTracks();
     }
 
     
@@ -202,16 +193,54 @@ public class MapElites : MonoBehaviour
         return trackVectors;   
     }
  
-    private Tracks MutateTracks(Tracks randomeTrack)
+    private void MutateTracks()
     {
-        MapTrack(randomeTrack);
+        for (int i = 0; i < mutations; i++) {
+            Tracks[] popArr = population.ToArray();
 
-        List<Vector3> newDirections = Shuffle(randomeTrack.trackDirections);
+            for (int j = 0; j < 30; j++) {
+                int randomInt = Random.Range(0, popArr.Length);
 
-        Tracks mutatedTrack = new Tracks(newDirections);
-        
-        return mutatedTrack;
+                List<Vector3> newDirections = Shuffle(popArr[randomInt].trackDirections);
+
+                Tracks mutatedTrack = new Tracks(newDirections);
+
+                population.Add(mutatedTrack);
+            }
+            PopSort();
+            if(i != mutations - 1) {
+                KillPop();
+            }
+        }
+        DrawMaps();
     }
+
+    public void PopSort() {
+        population.Sort((x, y) => x.fitness.CompareTo(y.fitness));
+    }
+
+    public void KillPop() {
+        population.RemoveRange(0, 30);
+    }
+
+    public void DrawMaps() {
+       // Tracks[] maps = population.ToArray();
+        foreach(Tracks t in population) {
+            MapTrack(t);
+        }
+
+         //Draw tracks in scene
+        DrawTrack(map[0], new Vector3(0, 0, 0));
+        DrawTrack(map[1], new Vector3(0, 30, 0));
+        DrawTrack(map[2], new Vector3(0, 60, 0));
+        DrawTrack(map[3], new Vector3(30, 0, 0));
+        DrawTrack(map[4], new Vector3(30, 30, 0));
+        DrawTrack(map[5], new Vector3(30, 60, 0));
+        DrawTrack(map[6], new Vector3(60, 0, 0));
+        DrawTrack(map[7], new Vector3(60, 30, 0));
+        DrawTrack(map[8], new Vector3(60, 60, 0));
+    }
+
 
    
 
@@ -392,6 +421,8 @@ public class MapElites : MonoBehaviour
         //Vector3 newPoint = startPoint + direction * pointSpace;
        // Debug.DrawLine(point, newPoint, color, 300f);
     }
+
+
 
    
 }

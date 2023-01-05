@@ -27,18 +27,17 @@ public class Tracks
     private int NumberOfCurves(List<Vector3> track)
      {
          
-         for (int i = 0; i < track.Count; i++)
+         for (int i = 0; i < track.Count -1 ; i++)
          {
-            for (int x = 1; x < track.Count; x++)
-            {
-                //calculate number of curves based on neightbouring directions being distinct
-                if (track[i] != track[x])
-                {
-                    curves++;
-                }
+            int compare = i + 1;
+
+            if (track[i] != track[compare]) {
+                curves++;
+                Debug.Log("int i: " + i);
+                Debug.Log("Compare: " + compare);
             }
          }
-
+        Debug.Log("Curves: " + curves);
          return curves;
      }
 
@@ -51,37 +50,26 @@ public class Tracks
        
 
         //look through the list of directions
-        for (int i = 0; i < trackList.Count; i++)
+        for (int i = 0; i < trackList.Count - 2; i++)
         {
-            for (int d = 1; d < trackList.Count; d++)
-            {
-                //calculate speedpoints if direction is uniform
-                if (trackList[i] == trackList[d])
-                {
-                    trackSpeed++;
-                }
+            int j = i + 1;
+            int k = i + 2;
 
-                //calculate challangepoints based on steepness of curves
+            if(trackList[i] == trackList[j]) {
+                trackSpeed++;
+            }
 
-                //int curveSteep = Mathf.Abs(trackList[i] - trackList[x]);
-                if (Mathf.Sqrt(Mathf.Pow(Mathf.Abs(trackList[i].x - trackList[d].x), 2) + Mathf.Pow(Mathf.Abs(trackList[i].y - trackList[d].y), 2)) < 2)
-                {
-                    trackChallenge++;
-                }
+            if (Mathf.Sqrt(Mathf.Pow(Mathf.Abs(trackList[i].x - trackList[j].x), 2) + Mathf.Pow(Mathf.Abs(trackList[i].y - trackList[j].y), 2)) < 2) {
+                trackChallenge++;
+            }
 
-                for(int r = 0; r > trackList.Count; r++)
-                {
-                    //calculate diversitypoints if the three following directions are diverse
-                    if (trackList[i] != trackList[d] && trackList[d] != trackList[r] && trackList[r] != trackList[r])
-                    {
-                        trackDiverse++;
-                    }
-                }
+            if (trackList[i] != trackList[j] && trackList[j] != trackList[k] && trackList[k] != trackList[k]) {
+                trackDiverse++;
             }
         }
 
         //Sum up points from these factores
-        int fitness = trackSpeed + trackChallenge + trackDiverse;
+        int fitness = (trackSpeed + trackChallenge + trackDiverse)/length;
         return fitness;
 
     }
