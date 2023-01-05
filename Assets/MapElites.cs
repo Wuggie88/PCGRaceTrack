@@ -15,7 +15,7 @@ public class MapElites : MonoBehaviour
     public List<Vector3> Direction = new List<Vector3>();
     public List<Tracks> population = new List<Tracks>();
     Color color = Color.red;
-    public int mutations = 10;
+    public int mutations = 1000;
     int xMax = 10;
     int yMax = 10;
     int xMin = -10;
@@ -51,40 +51,8 @@ public class MapElites : MonoBehaviour
 
         population.RemoveRange(0, 30);
 
-        //Mutate tracks 10 times
-        /* for (int i = 0; i <= 10; i++)
-         {
-
-             //Select random Track from map and mutate
-             Tracks mutatedTracks;
-             int select = Random.Range(0, map.Length);
-
-             //Check if randomly selected mapspace holds a track
-             while (map[select] != null)
-             {
-
-                 //mutate if success
-                 mutatedTracks = MutateTracks(map[select]);
-
-        //place mutated track in map if it is the better solution
-                 MapTrack(mutatedTracks);
-
-         //DrawTrack(mutatedTracks, startingPoint);
-                 break;
-
-             }
-
-         }
-
-
-        */
-        /*  for (int i = 0; i < map.Count; i++)
-          {
-              Debug.Log(map[i].length);
-              Debug.Log(map[i].trackDirections);
-
-          }
-          //see how many tracks is mapped
+        
+      /*    //see how many tracks is mapped
           Debug.Log(map.Count);
         */
         MutateTracks();
@@ -201,7 +169,27 @@ public class MapElites : MonoBehaviour
             for (int j = 0; j < 30; j++) {
                 int randomInt = Random.Range(0, popArr.Length);
 
-                List<Vector3> newDirections = Shuffle(popArr[randomInt].trackDirections);
+                List<Vector3> newDirections = popArr[randomInt].trackDirections;
+
+                newDirections.RemoveAt(newDirections.Count - 1);
+
+                randomInt = Random.Range(0, newDirections.Count);
+
+                newDirections[randomInt] = Direction[Random.Range(0, Direction.Count)];
+
+                Vector3 point = new Vector3(0,0,0);
+                Vector3 newPoint;
+
+                for (int d = 0; d < newDirections.Count; d++)
+                {
+
+                    newPoint = point + newDirections[d] * pointSpace;
+                    point = newPoint;
+                }
+                newPoint = new Vector3(0, 0, 0);
+                Vector3 newD = newPoint - point;
+
+                newDirections.Add(newD);
 
                 Tracks mutatedTrack = new Tracks(newDirections);
 
