@@ -14,6 +14,7 @@ public class MapElites : MonoBehaviour
     Vector3 startingPoint = new Vector3(0,0,0);
     public List<Vector3> Direction = new List<Vector3>();
     public List<Tracks> population = new List<Tracks>();
+    public Tracks[] originalArray;
     Color color = Color.red;
     public int mutations = 1000;
     int xMax = 10;
@@ -48,6 +49,8 @@ public class MapElites : MonoBehaviour
         }
 
         population.Sort((x, y) => x.fitness.CompareTo(y.fitness));
+
+        originalArray = population.ToArray();
 
         population.RemoveRange(0, 30);
 
