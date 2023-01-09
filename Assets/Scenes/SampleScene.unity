@@ -278,6 +278,8 @@ MonoBehaviour:
     curves: 0
     fitness: 0
   Direction: []
+  population: []
+  mutations: 100
 --- !u!4 &2142419980
 Transform:
   m_ObjectHideFlags: 0

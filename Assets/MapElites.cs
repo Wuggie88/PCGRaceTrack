@@ -37,7 +37,7 @@ public class MapElites : MonoBehaviour
               Debug.Log(Direction[i]);
           }*/
 
-        // Make 1000 random tracks and place in map
+        // Make 100 random tracks and place in map
        for (int i = 0; i <= 100; i++)
         {
             //Create random racetracks
