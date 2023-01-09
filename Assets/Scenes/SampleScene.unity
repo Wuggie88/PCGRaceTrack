@@ -279,6 +279,7 @@ MonoBehaviour:
     fitness: 0
   Direction: []
   population: []
+  originalArray: []
   mutations: 100
 --- !u!4 &2142419980
 Transform:

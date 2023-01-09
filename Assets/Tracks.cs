@@ -68,7 +68,7 @@ public class Tracks
             }
         }
 
-        //Sum up points from these factores
+        //Sum up points from these factores and divide them by the lenght of the track.
         int fitness = (trackSpeed + trackChallenge + trackDiverse)/length;
         return fitness;
 
