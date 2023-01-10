@@ -240,43 +240,99 @@ MonoBehaviour:
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   - trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
+  orgMap:
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
+  - trackDirections: []
+    length: 0
+    curves: 0
+    fitness: 0
+    floatFitness: 0
   track:
     trackDirections: []
     length: 0
     curves: 0
     fitness: 0
+    floatFitness: 0
   Direction: []
   population: []
   originalArray: []

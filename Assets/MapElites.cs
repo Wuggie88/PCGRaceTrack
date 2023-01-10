@@ -10,6 +10,7 @@ public class MapElites : MonoBehaviour
      */
 
     public Tracks[] map = new Tracks[9];
+    public Tracks[] orgMap = new Tracks[9];
     public Tracks track;
     Vector3 startingPoint = new Vector3(0,0,0);
     public List<Vector3> Direction = new List<Vector3>();
@@ -230,10 +231,101 @@ public class MapElites : MonoBehaviour
         DrawTrack(map[6], new Vector3(60, 0, 0));
         DrawTrack(map[7], new Vector3(60, 30, 0));
         DrawTrack(map[8], new Vector3(60, 60, 0));
+
+
+        foreach (Tracks n in originalArray) {
+            OrgMapTrack(n);
+        }
+
+        //Draw tracks in scene
+        DrawTrack(orgMap[0], new Vector3(90, 0, 0));
+        DrawTrack(orgMap[1], new Vector3(90, 30, 0));
+        DrawTrack(orgMap[2], new Vector3(90, 60, 0));
+        DrawTrack(orgMap[3], new Vector3(120, 0, 0));
+        DrawTrack(orgMap[4], new Vector3(120, 30, 0));
+        DrawTrack(orgMap[5], new Vector3(120, 60, 0));
+        DrawTrack(orgMap[6], new Vector3(120, 0, 0));
+        DrawTrack(orgMap[7], new Vector3(150, 30, 0));
+        DrawTrack(orgMap[8], new Vector3(150, 60, 0));
     }
 
+    private void OrgMapTrack(Tracks track) {
+        float length = track.length;
+        int curves = track.curves;
+        int fitness = track.fitness;
 
-   
+        //place track in map space according to length and curves
+        if (length > 0 && length < 50) {
+            if (curves > 0 && curves < curveMin) {
+                if (orgMap[0].fitness < track.fitness) {
+                    orgMap[0] = track;
+                } else if (orgMap[0] == null) {
+                    orgMap[0] = track;
+                }
+
+            } else if (curves >= curveMin && curves < curveMax) {
+                if (orgMap[3].fitness < track.fitness) {
+                    orgMap[3] = track;
+                } else if (orgMap[3] == null) {
+                    orgMap[3] = track;
+                }
+            } else if (curves >= curveMax) {
+                if (orgMap[6].fitness < track.fitness) {
+                    orgMap[6] = track;
+                } else if (orgMap[6] == null) {
+                    orgMap[6] = track;
+                }
+
+            }
+
+        } else if (length >= 50 && length < 100) {
+            if (curves > 0 && curves < curveMin) {
+                if (orgMap[1].fitness < track.fitness) {
+                    orgMap[1] = track;
+                } else if (orgMap[1] == null) {
+                    orgMap[1] = track;
+                }
+            } else if (curves >= curveMin && curves < curveMax) {
+                if (orgMap[4].fitness < track.fitness) {
+                    orgMap[4] = track;
+                } else if (orgMap[4] == null) {
+                    orgMap[4] = track;
+                }
+            } else if (curves >= curveMax) {
+                if (orgMap[7].fitness < track.fitness) {
+                    orgMap[7] = track;
+                } else if (orgMap[7] == null) {
+                    orgMap[7] = track;
+                }
+            }
+        } else if (length >= 100) {
+            if (curves > 0 && curves < curveMin) {
+                if (orgMap[2].fitness < track.fitness) {
+                    orgMap[2] = track;
+                } else if (orgMap[2] == null) {
+                    orgMap[2] = track;
+                }
+            } else if (curves >= curveMin && curves < curveMax) {
+                if (orgMap[5].fitness < track.fitness) {
+                    orgMap[5] = track;
+                } else if (orgMap[5] == null) {
+                    orgMap[5] = track;
+                }
+            } else if (curves >= curveMax) {
+                if (orgMap[8].fitness < track.fitness) {
+                    orgMap[8] = track;
+                } else if (orgMap[8] == null) {
+                    orgMap[8] = track;
+                }
+            }
+
+        }
+
+
+        //Check if track is added to map
+        // Debug.Log(map.Count);
+    }
+
 
     private void MapTrack(Tracks track)
     {
@@ -405,7 +497,9 @@ public class MapElites : MonoBehaviour
             Debug.DrawLine(point, newPoint, color, 300f);
             point = newPoint;
         }
-
+        Vector3 lineStart = new Vector3(75, -10, 0);
+        Vector3 lineEnd = new Vector3(75, 100, 0);
+        Debug.DrawLine(lineStart, lineEnd, color, 300f);
 
 
 
