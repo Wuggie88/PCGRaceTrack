@@ -11,9 +11,10 @@ public class Tracks
 
     Color color = Color.red;
     public List<Vector3> trackDirections;
-    public int length;
+    public float length;
     public int curves;
     public int fitness;
+    public float floatFitness;
     
 
     public Tracks(List<Vector3> ListOfDirection)
@@ -44,9 +45,9 @@ public class Tracks
     private int Fitness(List<Vector3> trackList)
     {
         // speed (how many times do we have the same direction in a row) Look at two spaces in the arrow at a time and move the span
-        int trackSpeed = 0;
-        int trackChallenge = 0;
-        int trackDiverse = 0;
+        float trackSpeed = 0;
+        float trackChallenge = 0;
+        float trackDiverse = 0;
        
 
         //look through the list of directions
@@ -69,7 +70,8 @@ public class Tracks
         }
 
         //Sum up points from these factores and divide them by the lenght of the track.
-        int fitness = (trackSpeed + trackChallenge + trackDiverse)/length;
+        floatFitness = (trackSpeed + trackChallenge + trackDiverse)/length * 100.0f;
+        fitness = (int)floatFitness;
         return fitness;
 
     }

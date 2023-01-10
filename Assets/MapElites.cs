@@ -237,7 +237,7 @@ public class MapElites : MonoBehaviour
 
     private void MapTrack(Tracks track)
     {
-        int length = track.length;
+        float length = track.length;
         int curves=track.curves;
         int fitness = track.fitness;
 
