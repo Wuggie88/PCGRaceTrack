@@ -63,7 +63,7 @@ public class Tracks
                 trackChallenge++;
             }
 
-            if (trackList[i] != trackList[j] && trackList[j] != trackList[k] && trackList[k] != trackList[k]) {
+            if (trackList[i] != trackList[j] && trackList[j] != trackList[k] && trackList[i] != trackList[k]) {
                 trackDiverse++;
             }
         }
